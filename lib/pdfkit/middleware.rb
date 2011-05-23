@@ -46,6 +46,7 @@ class PDFKit
             item.gsub(/(href|src)=(['"])\/([^\"']*|[^"']*)['"]/, '\1=\2' + root + '\3\2')
           end
         end
+      end
     end
 
     def rendering_pdf?
