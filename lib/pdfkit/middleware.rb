@@ -38,7 +38,14 @@ class PDFKit
       # Host with protocol
       root = PDFKit.configuration.root_url || "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}/"
 
-      body.gsub(/(href|src)=(['"])\/([^\"']*|[^"']*)['"]/, '\1=\2' + root + '\3\2')
+      if body.responds_to?('gsub')
+        body.gsub(/(href|src)=(['"])\/([^\"']*|[^"']*)['"]/, '\1=\2' + root + '\3\2')
+      elsif body.responds_to?('each')
+        body.each do |item|
+          if item.responds_to('gsub')
+            item.gsub(/(href|src)=(['"])\/([^\"']*|[^"']*)['"]/, '\1=\2' + root + '\3\2')
+          end
+        end
     end
 
     def rendering_pdf?
