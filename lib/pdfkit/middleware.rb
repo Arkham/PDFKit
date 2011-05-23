@@ -47,6 +47,7 @@ class PDFKit
             new_body << item.gsub(/(href|src)=(['"])\/([^\"']*|[^"']*)['"]/, '\1=\2' + root + '\3\2')
           else
             new_body << item
+          end
         end
         new_body
       end
