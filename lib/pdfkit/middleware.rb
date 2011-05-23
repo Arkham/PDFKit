@@ -41,11 +41,14 @@ class PDFKit
       if body.responds_to?('gsub')
         body.gsub(/(href|src)=(['"])\/([^\"']*|[^"']*)['"]/, '\1=\2' + root + '\3\2')
       elsif body.responds_to?('each')
+        new_body = []
         body.each do |item|
           if item.responds_to('gsub')
-            item.gsub(/(href|src)=(['"])\/([^\"']*|[^"']*)['"]/, '\1=\2' + root + '\3\2')
-          end
+            new_body << item.gsub(/(href|src)=(['"])\/([^\"']*|[^"']*)['"]/, '\1=\2' + root + '\3\2')
+          else
+            new_body << item
         end
+        new_body
       end
     end
 
