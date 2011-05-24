@@ -39,12 +39,12 @@ class PDFKit
       root = PDFKit.configuration.root_url || "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}/"
 
       if body.respond_to?('gsub')
-        body.gsub(/(href|src|url)(=|\()(['"]?)\//, '\1\2\3' + root + '/')
+        body.gsub(/(href|src|url)(=|\()(['"])?\//, '\1\2\3' + root + '/')
       elsif body.respond_to?('each')
         new_body = []
         body.each do |item|
           if item.respond_to?('gsub')
-            new_body << item.gsub(/(href|src|url)(=|\()(['"]?)\//, '\1\2\3' + root + '/')
+            new_body << item.gsub(/(href|src|url)(=|\()(['"])?\//, '\1\2\3' + root + '/')
           else
             new_body << item
           end
